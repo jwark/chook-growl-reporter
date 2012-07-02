@@ -19,8 +19,8 @@ module.exports = {
 				}
 
 				function growlIt(type, msg) {
-					var title = type + ': ' + msg.name,
-						message = msg.error.name + ': ' + msg.error.message;
+					var title = msg.suiteName + ': ',
+						message = msg.name + ':' + msg.error.name + ': ' + msg.error.message;
 					//console.log(type + ' found, growl message:', message, 'title:', title);
 					growl(escapeForGrowl(message), {title: escapeForGrowl(title)}, function(growlStatus) { 
 						if (growlStatus) {
