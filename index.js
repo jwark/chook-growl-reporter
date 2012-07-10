@@ -1,6 +1,10 @@
 var growl = require('growl'),
 	growlTitle = { title: 'JS quality check'};
 
+var imageBasePath = __dirname + '/resources/',
+	errorImage = imageBasePath + 'error.png',
+	successImage = imageBasePath + 'success.png';
+
 // This can be used in a 'configure' block, e.g. 
 // chook_growl_reporter = require('chook-growl-reporter');
 // chook.use(chook_growl_reporter.individualFailureOrError());
@@ -18,11 +22,10 @@ module.exports = {
 					return escaped;
 				}
 
-				function growlIt(type, msg) {
+				function growlProblem(type, msg) {
 					var title = msg.suiteName + ': ',
 						message = msg.name + ':' + msg.error.name + ': ' + msg.error.message;
-					//console.log(type + ' found, growl message:', message, 'title:', title);
-					growl(escapeForGrowl(message), {title: escapeForGrowl(title)}, function(growlStatus) { 
+					growl(escapeForGrowl(message), {title: escapeForGrowl(title), image: errorImage}, function(growlStatus) { 
 						if (growlStatus) {
 							console.log('growl error: ' + growlStatus);
 						}
@@ -30,11 +33,11 @@ module.exports = {
 				};
 
 				e.on('fail', function(msg) {
-					growlIt('failure', msg);
+					growlProblem('failure', msg);
 				});
 
 				e.on('error', function(msg) {
-					growlIt('error', msg);
+					growlProblem('error', msg);
 				});
 			}
 		};
@@ -49,9 +52,9 @@ module.exports = {
 								+ ', pass: ' + status.pass
 								+ ', fail: ' + status.fail
 								+ ', error: ' + status.error,
-						title = (status.fail + status.error) > 0 ? 'FAILURE' : 'SUCCESS';
-
-					growl(message, {title: title});
+						title = (status.fail + status.error) > 0 ? 'FAILURE' : 'SUCCESS',
+						imageFile = (status.fail + status.error) > 0 ? errorImage : successImage;
+					growl(message, {title: title, image: imageFile});
 				});
 			}
 		};
