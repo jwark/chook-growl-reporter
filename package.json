@@ -1,18 +1,31 @@
 {
-  "author": "Justin Wark <justinwark@gmail.com>",
   "name": "chook-growl-reporter",
   "description": "Growl reporter for Chook - the Headless, framework-agnostic unit test runner",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jwark/chook-growl-reporter",
+  "author": {
+    "name": "Justin Wark",
+    "url": "justinwark.blogspot.com"
+  },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/jwark/chook-growl-reporter.git"
   },
-  "main": "lib/index",
+  "bugs": {
+    "url": "https://github.com/jwark/chook-growl-reporter/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://jwark.mit-license.org"
+    }
+  ],
+  "main": "index",
   "engines": {
     "node": "~0.8"
   },
   "dependencies": {
-    "growl": "~1.6.1"
+    "growl": "~1.7.0"
   },
   "devDependencies": {},
   "optionalDependencies": {}
